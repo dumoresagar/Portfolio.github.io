@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coder's Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+       
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .post {
+            margin-bottom: 40px;
+        }
+        .post h2 {
+            margin-top: 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="post">
+        <h1>Django Rest Framework(API)CRUD</h1>
+        <p><b>1. Install Django and Django REST Framework:</b></p>
+        Install Django and Django REST Framework using pip:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code1" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    pip install django djangorestframework
+                </code>
+            </pre>
+            <button onclick="copyCode1()">Copy code</button>
+        </div>
+
+        <p><b>2. Create a Django Project:</b></p>
+        Create a new Django project using the following command:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code2" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    django-admin startproject myproject
+                </code>
+            </pre>
+            <button onclick="copyCode2()">Copy code</button>
+        </div>
+
+
+        <p><b>3. Create a Django App:</b></p>
+        Create a Django app within your project:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code3" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    cd myproject
+                    django-admin startapp blog
+                                    </code>
+            </pre>
+            <button onclick="copyCode3()">Copy code</button>
+        </div>
+
+        <p><b>4. Define Models:</b></p>
+        Define your blog post model in blog/models.py:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code4" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    from django.db import models
+
+                    class Post(models.Model):
+                        title = models.CharField(max_length=100)
+                        content = models.TextField()
+                        created_at = models.DateTimeField(auto_now_add=True)
+                </code>
+            </pre>
+            <button onclick="copyCode4()">Copy code</button>
+        </div>
+
+        <p><b>5. Create Serializers:</b></p>
+        Create serializers for your models in blog/serializers.py:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code5" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    from rest_framework import serializers
+                    from .models import Post
+
+                    class PostSerializer(serializers.ModelSerializer):
+                        class Meta:
+                            model = Post
+                            fields = ['id', 'title', 'content', 'created_at']
+
+                </code>
+            </pre>
+            <button onclick="copyCode5()">Copy code</button>
+        </div>
+
+        <p><b>6. Create Views:</b></p>
+        Create views for your CRUD operations in blog/views.py:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code6" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    from rest_framework import generics
+                    from .models import Post
+                    from .serializers import PostSerializer
+
+                    class PostListCreate(generics.ListCreateAPIView):
+                        queryset = Post.objects.all()
+                        serializer_class = PostSerializer
+
+                </code>
+            </pre>
+            <button onclick="copyCode6()">Copy code</button>
+        </div>
+
+        <p><b>7. URL Configuration:</b></p>
+        Configure your URL patterns in myproject/urls.py:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code7" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    from django.urls import path
+                    from blog.views import PostListCreate
+
+                    urlpatterns = [
+                        path('api/posts/', PostListCreate.as_view(), name='post-list-create'),
+                        # Add other URL patterns as needed
+]
+
+                </code>
+            </pre>
+            <button onclick="copyCode7()">Copy code</button>
+        </div>
+
+        <p><b>8. Database Configuration:</b></p>
+        Configure your PostgreSQL database settings in myproject/settings.py:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code8" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    DATABASES = {
+                        'default': {
+                            'ENGINE': 'django.db.backends.postgresql',
+                            'NAME': 'mydatabase',
+                            'USER': 'myuser',
+                            'PASSWORD': 'mypassword',
+                            'HOST': 'localhost',
+                            'PORT': '5432',
+                        }
+                    }                    
+
+                </code>
+            </pre>
+            <button onclick="copyCode8()">Copy code</button>
+        </div>
+
+        <p><b>9. Run Migrations:</b></p>
+        Apply database migrations to create the necessary tables:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code9" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    python manage.py makemigrations
+                    python manage.py migrate
+                </code>
+            </pre>
+            <button onclick="copyCode9()">Copy code</button>
+        </div>
+
+        <p><b>10. Run the Server:</b></p>
+        Run the Django development server:
+        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+            <pre id="code10" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 6px; font-family: monospace; overflow-x: auto;">
+                <code >
+                    python manage.py runserver
+
+                </code>
+            </pre>
+            <button onclick="copyCode10()">Copy code</button>
+        </div>
+
+        <p><b>11.Test the Endpoint:</b></p>
+        Access the blog post creation endpoint at http://localhost:8000/api/posts/ using tools like Postman or a web browser.        <div style="position: relative; background-color: #f2f2f2; padding: 10px; border-radius: 8px;">
+                This is a basic setup for creating a CRUD API for blog posts using Django REST Framework and PostgreSQL.
+                You can further customize and extend the functionality according to your requirements.
+
+
+        </div>
+
+        <p><b>12. Conclusion:</b></p>
+        <b>Summary:</b><br>
+        We’ve covered a lot of ground in this project. You’ve learned how to set up an environment,
+        create a Django app, define models, create serializers, and build API endpoints. That’s pretty cool!
+
+        </div>
+
+
+
+
+
+    </div>
+
+    <!-- Add more blog posts here -->
+
+</div>
+
+</body>
+
+<script>
+    function copyCode1() {
+        var codeBlock = document.getElementById('code1');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode2() {
+        var codeBlock = document.getElementById('code2');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode3() {
+        var codeBlock = document.getElementById('code3');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode4() {
+        var codeBlock = document.getElementById('code4');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode5() {
+        var codeBlock = document.getElementById('code5');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode6() {
+        var codeBlock = document.getElementById('code6');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode7() {
+        var codeBlock = document.getElementById('code7');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode8() {
+        var codeBlock = document.getElementById('code8');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode9() {
+        var codeBlock = document.getElementById('code9');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+    function copyCode10() {
+        var codeBlock = document.getElementById('code10');
+        var range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Code copied!');
+    }
+
+
+    </script>
+</html>
