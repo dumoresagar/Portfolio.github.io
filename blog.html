@@ -31,6 +31,20 @@
             border-radius: 5px;
             overflow-x: auto;
         }
+        .button {
+        background-color: #04AA6D; /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 2px 1px;
+        cursor: pointer;
+        }
+
+        .button {border-radius: 12px;}
     </style>
 </head>
 <body>
@@ -48,7 +62,7 @@
                     pip install django djangorestframework
                 </code>
             </pre>
-            <button onclick="copyCode1()">Copy code</button>
+            <button onclick="copyCode1()" class="button button">Copy code</button>
         </div>
 
         <p><b>2. Create a Django Project:</b></p>
@@ -59,7 +73,7 @@
                     django-admin startproject myproject
                 </code>
             </pre>
-            <button onclick="copyCode2()">Copy code</button>
+            <button onclick="copyCode2()" class="button button">Copy code</button>
         </div>
 
 
@@ -72,7 +86,7 @@
                     django-admin startapp blog
                                     </code>
             </pre>
-            <button onclick="copyCode3()">Copy code</button>
+            <button onclick="copyCode3()" class="button button">Copy code</button>
         </div>
 
         <p><b>4. Define Models:</b></p>
@@ -88,7 +102,7 @@
                         created_at = models.DateTimeField(auto_now_add=True)
                 </code>
             </pre>
-            <button onclick="copyCode4()">Copy code</button>
+            <button onclick="copyCode4()" class="button button">Copy code</button>
         </div>
 
         <p><b>5. Create Serializers:</b></p>
@@ -106,7 +120,7 @@
 
                 </code>
             </pre>
-            <button onclick="copyCode5()">Copy code</button>
+            <button onclick="copyCode5()" class="button button">Copy code</button>
         </div>
 
         <p><b>6. Create Views:</b></p>
@@ -124,7 +138,7 @@
 
                 </code>
             </pre>
-            <button onclick="copyCode6()">Copy code</button>
+            <button onclick="copyCode6()" class="button button">Copy code</button>
         </div>
 
         <p><b>7. URL Configuration:</b></p>
@@ -142,7 +156,7 @@
 
                 </code>
             </pre>
-            <button onclick="copyCode7()">Copy code</button>
+            <button onclick="copyCode7()" class="button button">Copy code</button>
         </div>
 
         <p><b>8. Database Configuration:</b></p>
@@ -163,7 +177,7 @@
 
                 </code>
             </pre>
-            <button onclick="copyCode8()">Copy code</button>
+            <button onclick="copyCode8()" class="button button">Copy code</button>
         </div>
 
         <p><b>9. Run Migrations:</b></p>
@@ -175,7 +189,7 @@
                     python manage.py migrate
                 </code>
             </pre>
-            <button onclick="copyCode9()">Copy code</button>
+            <button onclick="copyCode9()" class="button button">Copy code</button>
         </div>
 
         <p><b>10. Run the Server:</b></p>
@@ -187,7 +201,7 @@
 
                 </code>
             </pre>
-            <button onclick="copyCode10()">Copy code</button>
+            <button onclick="copyCode10()" class="button button">Copy code</button>
         </div>
 
         <p><b>11.Test the Endpoint:</b></p>
