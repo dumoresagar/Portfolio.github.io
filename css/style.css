@@ -298,7 +298,7 @@ table {
 }
 /* ==========================================================================Section Styles========================================================================== */
 .section-padding {
-	padding:90px 0 100px
+	padding:20px 0 100px
 }
 .dark-bg {
 	background:#f3f5f8;
@@ -470,7 +470,7 @@ table {
 .hero {
 	/* background: url('../img/header-bg.jpg') right bottom no-repeat; */
 	background-size: contain;
-	padding:110px 0 100px 0;
+	padding:0px 0 100px 0;
 	height:auto;
 	background-color: #000000;
 }
@@ -551,7 +551,7 @@ table {
 	}
 }
 .scrollto {
-	padding: 150px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	display:block;
 	color:#FFF;
 	text-decoration:none;
@@ -886,7 +886,7 @@ img.grayscale:hover {
 /* ==========================================================================CTA========================================================================== */
 .spacer-cta {
 	background-color: #E04343;
-	padding:70px 0;
+	padding:25px 0;
 }
 .outline-btn {
 	display:inline-block;
